@@ -1,5 +1,5 @@
 # PRELUDE
-Code for [Aligning LLM Agents by Learning Latent Preference from User Edits](https://arxiv.org/pdf/2404.15269).
+Code for Aligning LLM Agents by Learning Latent Preference from User Edits
 
 ## Table of Contents
 - [Installation](#installation)
@@ -52,7 +52,7 @@ All agents mentioned in our paper are located in the [agent folder](https://gith
 (INSTRUCTIONS TO BE ADDED)
 
 ## Implement Your Own Agent
-Every agent should be inherited from the base [Agent](https://github.com/gao-g/prelude/blob/7171dd1a64fc2068133bde723ca779e74ee48766/src/agent/abstract_agent.py#L10C7-L10C12) class, and have implementations of the following methods:
+Every agent should be inherited from the base [Agent](https://github.com/gao-g/prelude/tree/main/src/agent/abstract_agent.py#L10C7-L10C12) class, and have implementations of the following methods:
 1) `def complete(self, text) -> LLMOutput` - task completion method returning LLMOutput object containing output text and (optionally) debug token information
 2) `def learn(self, message, correction: Correction) -> Dict` - learning method taking context text and pair of (agent completion, user edits) as inputs. Return value is the dictionary of metrics required to be logged.
 
