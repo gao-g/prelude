@@ -1,0 +1,71 @@
+{
+    "workspace_config": {
+        "sink": "dummy",
+        "project":"lfe",
+        "description": "email",
+        "log_folder": "experiments/email",
+        "log_level": "INFO"
+    },
+    "task_config": {
+        "task": "email",
+        "num_train_ex": 200,
+        "seed": 0
+    },
+    "user_config": {
+        "model": "gpt-4"
+    },
+    "agent_configs": {
+        "oracle_preference": {
+            "model": "gpt-4",
+            "agent": "oracle-preference"
+        },
+        "no_learning": {
+            "model": "gpt-4",
+            "agent": "no-learning"
+        },
+        "explore-exploit": {
+            "model": "gpt-4",
+            "agent": "explore-exploit",
+            "num_ex_to_explore": 5
+        },
+        "continual": {
+            "model": "gpt-4",
+            "agent": "continual",
+            "icl_count": 5
+        },
+        "icl_edit_5_bert": {
+            "model": "gpt-4",
+            "agent": "icl-edit",
+            "encoder_type": "bert",
+            "icl_count": 5
+        },
+        "icl_edit_5_mpnet": {
+            "model": "gpt-4",
+            "agent": "icl-edit",
+            "encoder_type": "mpnet",
+            "icl_count": 5
+        },
+        "cipher_1_bert": {
+            "model": "gpt-4",
+            "agent": "cipher-1",
+            "encoder_type": "bert"
+        },
+        "cipher_1_mpnet": {
+            "model": "gpt-4",
+            "agent": "cipher-1",
+            "encoder_type": "mpnet"
+        },
+        "cipher_5_bert": {
+            "model": "gpt-4",
+            "agent": "cipher-n", 
+            "icl_count": 5,
+            "encoder_type": "bert"
+        },
+        "cipher_5_mpnet": {
+            "model": "gpt-4",
+            "agent": "cipher-n", 
+            "icl_count": 5,
+            "encoder_type": "mpnet"
+        }
+    }
+}
