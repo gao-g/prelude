@@ -47,7 +47,8 @@ User encapsulates access to task and LLM resource for simulating user responses.
 Classes responsible for accomplishing the tasks, encapsulating access to LLM and learning algorithm implementations.
 
 ## Reproduce Our Experiments
-All agents mentioned in our paper are located in the [agent folder](https://github.com/gao-g/prelude/tree/main/src/agent). 
+All agents mentioned in our paper are located in the [_agent_ folder](https://github.com/gao-g/prelude/tree/main/src/agent). 
+You can find the insturction and scripts to reproduce our experiments in the [_experiments_ folder](https://github.com/gao-g/prelude/tree/main/experiments).
 
 (INSTRUCTIONS TO BE ADDED)
 
