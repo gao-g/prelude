@@ -50,8 +50,6 @@ Classes responsible for accomplishing the tasks, encapsulating access to LLM and
 All agents mentioned in our paper are located in the [_agent_ folder](https://github.com/gao-g/prelude/tree/main/src/agent). 
 You can find the insturction and scripts to reproduce our experiments in the [_experiments_ folder](https://github.com/gao-g/prelude/tree/main/experiments).
 
-(INSTRUCTIONS TO BE ADDED)
-
 ## Implement Your Own Agent
 Every agent should be inherited from the base [Agent](https://github.com/gao-g/prelude/blob/7171dd1a64fc2068133bde723ca779e74ee48766/src/agent/abstract_agent.py#L10C7-L10C12) class, and have implementations of the following methods:
 1) `def complete(self, text) -> LLMOutput` - task completion method returning LLMOutput object containing output text and (optionally) debug token information
