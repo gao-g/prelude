@@ -1,5 +1,5 @@
 # PRELUDE
-Code for [Aligning LLM Agents by Learning Latent Preference from User Edits](https://arxiv.org/pdf/2404.15269).
+Code for [Aligning LLM Agents by Learning Latent Preference from User Edits](https://arxiv.org/pdf/2404.15269), NeurIPS 2024.
 
 ## Table of Contents
 - [Installation](#installation)
