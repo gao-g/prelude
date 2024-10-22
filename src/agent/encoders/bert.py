@@ -38,7 +38,7 @@ class BertEncoding(AbstractEncoder):
 
         avg_masked_hidden_state = avg_masked_hidden_state.detach().cpu()
 
-        return avg_masked_hidden_state
+        return avg_masked_hidden_state / torch.norm(avg_masked_hidden_state)
 
 
 if __name__ == '__main__':
