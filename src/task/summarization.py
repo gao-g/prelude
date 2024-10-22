@@ -49,40 +49,43 @@ class Summarization(Task):
 
 
     def get_edit_prompts(self, input: str, output: str, preference: str) -> Tuple[str, str]:
-        resolution_prompt = f"""ARTICLE: {input} \n
-                    Summary: {output}\n
-                    Is the above summary of the above article good for person who would love to use the following style: {preference}? Please answer yes or no."""
-        edit_prompt = f"""Summary: {output} \n
-                    Assume that you prefer {preference}. 
-                    Please revise the above summary of an article to meet your style:"""
+        resolution_prompt = "\n".join([
+            f"Article:\n{input}",
+            f"Summary:\n{output}",
+            f"Is the above summary of the above article good for person who would love to use the following style: {preference}? Please answer yes or no."])
+        edit_prompt = "\n".join([
+            f"Summary:\n{output}",
+            f"Assume that you prefer the following style: {preference}.",
+            f"Please revise the above summary of an article to meet your style:"])
         return resolution_prompt, edit_prompt
     
     def get_task_prompt(self, input: str, preference: Optional[str] = None) -> str:
         if preference is None:
-            return f""" Article:{input} \n
-                    Please summarize the above article: """
-        return f"""Article:{input} \n
-            Assume that you need to summarize the above article for a user, 
-            who prefers the following style: {preference}. 
-            Please write a summary of the above article to address those specified preferences."""
+            return "\n".join([
+                f"Article:\n{input}",
+                f"Please summarize the above article."])
+        return "\n".join([
+            f"Article:\n{input}",
+            f"Assume that you need to summarize the above article for a user, who prefers the following style: {preference}.",
+            f"Please write a summary of the above article to address those specified preferences."])
 
     def get_task_prompt_icl(self, input: str, corrections: List[Correction]) -> str:
         prompt = ''
         for correction in corrections:
-            prompt = prompt + f'Original summary of an article: {correction.original.text}\n'
-            prompt = prompt + f'Revised summary by a user: {correction.edited.text}\n\n'
-        prompt += f"""Article: {input} \n
-        Based on the edits and revision by this user on the original summary in the above examples, 
-        Please summarize the above article: """
+            prompt = prompt + f'Original summary of an article:\n{correction.original.text}\n'
+            prompt = prompt + f'Revised summary by a user:\n{correction.edited.text}\n\n'
+        prompt += "\n".join([
+            f"Article:\n{input}",
+            f"Based on the edits and revision by this user on the original summary in the above examples, please summarize the above article."])
         return prompt
     
     def get_task_prompt_icl_pref(self, input: str, preferences: List[str]) -> str:
-        prompt = 'List of user preferences successfully being used to generate summaries of similar documents: \n'
+        prompt = 'List of user preferences successfully being used to generate summaries of similar documents:\n'
         for preference in preferences:
             prompt = prompt + f'- {preference}\n'
-        prompt += f"""Article: {input} \n
-        Using the qualities most represented in the above list of preferences, 
-        please summarize the above article: """
+        prompt += "\n".join([
+            f"Article:\n{input}",
+            f"Using the qualities most represented in the above list of preferences, please summarize the above article."])
         return prompt
 
     def get_preference_inference_prompt(self, corrections: List[Correction]) -> str:
@@ -90,10 +93,9 @@ class Summarization(Task):
         for correction in corrections:
             prompt = prompt + f'Original summary of an article: {correction.original.text}\n'
             prompt = prompt + f'Revised summary by a user: {correction.edited.text}\n\n'
-        prompt += """Based on the edits and revision by this user on the original summary in the above examples, 
-        what do you find about this user's generic preference in terms of writing style and formatting?  
-        Please answer in a short phrase and only recommend those preferences that are widely used.
-        """
+        prompt += "\n".join([
+            f"Based on the edits and revision by this user on the original summary in the above examples, what do you find about this user's generic preference in terms of writing style and formatting?",  
+            f"Please answer in a short phrase and only recommend those preferences that are widely used."])
         return prompt 
 
 
@@ -101,6 +103,5 @@ class Summarization(Task):
         prompt = 'List of user preferences successfully being used to generate summaries of similar documents: \n'
         for preference in preferences:
             prompt += f'- {preference}\n'
-        prompt += """Based on the the above examples, please come up with short phrase with the most represented summarization preferences of the user.
-        """
+        prompt += "Based on the the above examples, please come up with short phrase with the most represented summarization preferences of the user."
         return prompt 
