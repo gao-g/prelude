@@ -1,6 +1,7 @@
 import os
 import time
 import openai
+from azure.identity import AzureCliCredential, get_bearer_token_provider
 import logging
 from typing import Union, Dict, List
 
@@ -8,15 +9,15 @@ from typing import Union, Dict, List
 class AzureGPT:
 #    MAX_SIZE = 16300
 
-    def __init__(self, name: str = "gpt-35-turbo-instruct"):
+    def __init__(self, name: str = "gpt-35-turbo-instruct", credential = None):
+        token_provider = get_bearer_token_provider(credential or AzureCliCredential(), "https://cognitiveservices.azure.com/.default")
         self.name = name
         self.dummy = False
-
         if name == "gpt-35-turbo-instruct" or name == "gpt-35-turbo" or name == "gpt-4":
             self.client = openai.AzureOpenAI(
-                api_key=os.getenv("GCR_GPT_KEY"),
                 api_version="2023-05-15",
                 azure_endpoint=os.getenv("GCR_GPT_URL"),
+                azure_ad_token_provider=token_provider
             )
 
         elif name == "dummy":
