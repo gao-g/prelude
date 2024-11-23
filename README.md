@@ -57,5 +57,13 @@ Every agent should be inherited from the base [Agent](https://github.com/gao-g/p
 
 Please check [the notebook example](https://github.com/gao-g/prelude/blob/main/examples/Try_new_agent.ipynb) of dummy agent implementation and end-to-end experiment run here. 
 
-
+## Citation
+```
+@inproceedings{Gao2024AligningLA,
+  title={Aligning LLM Agents by Learning Latent Preference from User Edits},
+  author={Ge Gao and Alexey Taymanov and Eduardo Salinas and Paul Mineiro and Dipendra Misra},
+  booktitle={Conference on Neural Information Processing Systems},
+  year={2024}
+}
+```
 
